@@ -98,6 +98,15 @@ const ChartTooltipContent = React.forwardRef<
       indicator?: "line" | "dot" | "dashed";
       nameKey?: string;
       labelKey?: string;
+      active?: boolean;
+      payload?: Array<{
+        dataKey?: string;
+        name?: string;
+        value?: any;
+        color?: string;
+        payload?: any;
+      }>;
+      label?: string;
     }
 >(
   (
@@ -229,11 +238,16 @@ const ChartLegend = RechartsPrimitive.Legend;
 
 const ChartLegendContent = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"div"> &
-    Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
-      hideIcon?: boolean;
-      nameKey?: string;
-    }
+  React.ComponentProps<"div"> & {
+    hideIcon?: boolean;
+    nameKey?: string;
+    payload?: Array<{
+      value?: string;
+      dataKey?: string;
+      color?: string;
+    }>;
+    verticalAlign?: "top" | "bottom";
+  }
 >(({ className, hideIcon = false, payload, verticalAlign = "bottom", nameKey }, ref) => {
   const { config } = useChart();
 
